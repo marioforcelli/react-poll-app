@@ -1,24 +1,12 @@
 import { useState } from 'react'
 import { Container } from './styles'
+import { useContext } from 'react'
+import { Context } from '../../context/Context'
 
 
 export default function CreatePoll({obj}){
-    const [polls, setPolls]  = useState([
-        {
-            'id': 0,
-            'title': 'Poll Teste',
-            'questions': 
-            [
-                {'question ' : 'Teste 01'},
-                {'question ' : 'Teste 02'},
-                {'question ' : 'Teste 03'},
-                {'question ' : 'Teste 04'}
-            ]
-    
-            
-        }
-    ]);
 
+    const [polls, setPolls] = useContext(Context)
     const handleSubmit = (e) =>{
         if(document.querySelector('.poll-title-input').value){
             setPolls((prev) =>{ 
@@ -34,7 +22,7 @@ export default function CreatePoll({obj}){
             ]
 
             })
-            console.log(obj)
+            console.log(polls)
     
         }
     }
