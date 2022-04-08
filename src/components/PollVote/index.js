@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { Context } from '../../context/Context';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Container } from './styles';
 import {Navigate } from 'react-router-dom'
 
 
 export default function PollVote(){
-    
+    const [checked, setChecked] = useState(false)
     const [polls, setPolls] = useContext(Context)
     const { id } = useParams();
     const pollCheck = polls.filter((i) => i.id == id)
@@ -14,32 +14,40 @@ export default function PollVote(){
     const handleCheck = (e) =>{
         document.querySelectorAll('.questions-check').forEach((i)=>{
             i.checked = false
+            i.parentNode.style.border = 'none'
+            console.log(e.target.parentNode.style.border)
         })
+        
         e.target.checked = true
+        e.target.parentNode.style.border  = '2px solid #5ec96e'
 
     }
 
     return(
-        <Container>
+        <Container checked={checked}>
             {polls.filter((i) => i.id == id).map((i, index)=>{
 
                 return(
                     
-                    <div>
-                        {}
-                        <h1>{i.title}</h1>
+                    <div className='wrap-poll'>
+                        <h1 className='question-title'>{i.title}</h1>
                         <div className='wrap-questions'>
                             {i.questions.map((i, index) =>{
                                 return(
-                                    <div>
+                                    <label className='question-container'>
                                         <input className='questions-check' type={'checkbox'} name='questions-check' onClick={handleCheck}/> 
                                         <span className='question-text'>{i.question}</span>
-                                    </div>  
+                                    </label>  
 
                                 )
 
                             })}
                         </div>
+                        <div className='bottom-poll' >
+                            <button className='send-btn'>Enviar voto</button>
+                            <span>Ver resultados</span>
+                        </div>
+
                     </div>
                 )
             })}

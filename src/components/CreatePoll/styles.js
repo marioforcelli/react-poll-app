@@ -12,11 +12,12 @@ export const Container = styled.div`
         font-size: 50px;
         font-weight: 400;
         margin-bottom: 60px;
+        text-align: center;
     }
 
     & input{
         height: 40px;
-        width: 500px;
+        width: min(70vw, 400px);
         margin: 0px 0px 20px 0px;
         padding-left: 20px;
         font-size: 25px;
@@ -41,14 +42,14 @@ export const Container = styled.div`
         margin-top: 0;
         margin-bottom: 30px;
         height: 55px;
-        width: 600px;
+        width: min(600px, 85vw);
         font-size: 40px;
     }
 
     & .save-btn{
         margin-top: 10px;
         justify-content: start;
-        width: 500px;
+        width: min(70vw, 400px);
         height: 50px;
         background-color: #5ec96e;
         border: none;
@@ -57,7 +58,6 @@ export const Container = styled.div`
         font-size: 18px;
         font-weight: 600;
         letter-spacing: 1px;
-        transition: ease 1s;
     }
 
     & .save-btn:hover{

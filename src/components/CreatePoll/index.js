@@ -2,11 +2,13 @@ import { useState } from 'react'
 import { Container } from './styles'
 import { useContext } from 'react'
 import { Context } from '../../context/Context'
+import { Link } from 'react-router-dom'
 
 
 export default function CreatePoll({obj}){
 
     const [polls, setPolls] = useContext(Context)
+    let idAux = polls.length + 1
     const handleSubmit = (e) =>{
         if(document.querySelector('.poll-title-input').value){
             setPolls((prev) =>{ 
@@ -20,6 +22,7 @@ export default function CreatePoll({obj}){
                             })
                 }
             ]
+            
 
             })
             console.log(polls)
@@ -47,7 +50,7 @@ export default function CreatePoll({obj}){
                 <input></input>
                 <input></input>
             </div>
-            <button onClick={handleSubmit} className='save-btn'>Criar Enquete</button>
+            <Link to={`/${idAux}`}><button onClick={handleSubmit} className='save-btn'>Criar Enquete</button></Link>
         </Container>
     )
 
