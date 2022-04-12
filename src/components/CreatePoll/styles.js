@@ -70,4 +70,9 @@ export const Container = styled.div`
         flex-direction: column;
 
     }
+
+    & .form-questions{
+        display: flex;
+        flex-direction: column;
+    }
 `

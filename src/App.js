@@ -8,26 +8,27 @@ import {Context} from './context/Context';
 import {useEffect, useState} from 'react'
 
 
+
 function App() {
 
 
 
-  const [polls, setPolls]  = useState([
-    {
-        'id': 0,
-        'title': 'Poll Teste',
-        'questions': 
-        [
-            {'question' : 'Teste 01'},
-            {'question' : 'Teste 02'},
-            {'question' : 'Teste 03'},
-            {'question' : 'Teste 04'}
-        ]
-
-        
-    },
+//   const [polls, setPolls]  = useState([
+//     {
+//         'id': 0,
+//         'title': 'Poll Teste',
+//         'questions': 
+//         [
+//             [{'question' : 'Teste 01', 'votes': 0}],
+//             [{'question' : 'Teste 02', 'votes': 0}],
+//             [{'question' : 'Teste 03', 'votes': 0}],
+//             [{'question' : 'Teste 04', 'votes': 0}]
+//         ]
+//     },
     
-]);
+// ]);
+
+const [polls, setPolls] = useState({})
 
   
   return (
