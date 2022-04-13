@@ -1,7 +1,7 @@
 import firebaseConfig from "../firebaseConfig";
 
 import { firebase, initializeApp } from 'firebase/app'
-import { getFirestore, collection, getDocs, doc, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, doc, addDoc, setDoc } from 'firebase/firestore';
 
 const firebaseApp = initializeApp(firebaseConfig)
 const db = getFirestore();
@@ -16,7 +16,8 @@ async function getPolls(){
 }
 
 async function addPoll(obj){
-    const doc = await addDoc(collection(db, 'polls'), obj)
+    const newPoll = doc(collection(db, 'polls'))
+    await setDoc(newPoll, obj)
     
 
 }

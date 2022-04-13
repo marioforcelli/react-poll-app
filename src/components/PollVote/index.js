@@ -6,7 +6,6 @@ import {Navigate } from 'react-router-dom'
 
 
 export default function PollVote(index){
-    const [checked, setChecked] = useState(false)
     const [polls, setPolls] = useContext(Context)
     const { id } = useParams();
     const objClone = polls
@@ -26,8 +25,6 @@ export default function PollVote(index){
 
     const handleClick = (e) =>{
         setPolls(prev => prev.questions[index].votes++)
-
-
     }
 
     return(
@@ -42,7 +39,7 @@ export default function PollVote(index){
                         return(
                             <label className='question-container'>
                                 <input id={index} className='questions-check' type={'checkbox'} name='questions-check' onClick={handleCheck}/> 
-                                <span className='question-text'>{i[0].question}</span>
+                                <span className='question-text'>{i.question}</span>
                             </label>  
                             
                         )
