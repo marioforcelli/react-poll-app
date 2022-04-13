@@ -6,6 +6,7 @@ import Routes from './routes';
 import {BrowserRouter} from 'react-router-dom'
 import {Context} from './context/Context';
 import {useEffect, useState} from 'react'
+import {v4 as uuidv4} from 'uuid'
 
 
 
@@ -13,22 +14,21 @@ function App() {
 
 
 
-//   const [polls, setPolls]  = useState([
-//     {
-//         'id': 0,
-//         'title': 'Poll Teste',
-//         'questions': 
-//         [
-//             [{'question' : 'Teste 01', 'votes': 0}],
-//             [{'question' : 'Teste 02', 'votes': 0}],
-//             [{'question' : 'Teste 03', 'votes': 0}],
-//             [{'question' : 'Teste 04', 'votes': 0}]
-//         ]
-//     },
+  const [polls, setPolls]  = useState(
+    {
+        'id': uuidv4(),
+        'title': '',
+        'questions': 
+        [
+            {'question' : '', 'votes': 0},
+            {'question' : '', 'votes': 0},
+            {'question' : '', 'votes': 0},
+            {'question' : '', 'votes': 0}
+        ]
+    },
     
-// ]);
+);
 
-const [polls, setPolls] = useState({})
 
   
   return (
