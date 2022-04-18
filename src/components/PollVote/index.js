@@ -3,23 +3,18 @@ import { Context } from '../../context/Context';
 import { useContext, useEffect, useState } from 'react';
 import { Container } from './styles';
 import {Navigate } from 'react-router-dom'
+import Api from '../../services/Api';
 
 
 export default function PollVote(index){
     const [poll, setPoll] = useState([])
-    const {getPoll , fetchedPoll, setFetchedPoll, addVote} = useContext(Context)
+    const {pollTitle, questions, getPoll, addVote} = useContext(Context)
     const { id } = useParams();
 
-
-
     useEffect(()=>{
-        if(fetchedPoll.length === 0){
-            getPoll(id)
-            
+        getPoll(id)
+    },[])
 
-        }
-  
-    }, [fetchedPoll])
 
     const handleCheck = (e) =>{
         document.querySelectorAll('.questions-check').forEach((i)=>{
@@ -29,13 +24,15 @@ export default function PollVote(index){
         index = e.target.id
         e.target.checked = true
         e.target.parentNode.style.border  = '2px solid #5ec96e'
-        console.log(index)
         
 
     }
 
     const handleClick = (e) =>{
-        addVote(index)
+        let voteInput = [...questions]
+        voteInput[index].votes = voteInput[index].votes + 1
+
+        addVote(voteInput)
     }
 
     return(
@@ -43,10 +40,10 @@ export default function PollVote(index){
         
                     
             <div className='wrap-poll'>
-                <h1 className='question-title'>{fetchedPoll.title}</h1>
+                <h1 className='question-title'>{pollTitle}</h1>
                 <div className='wrap-questions'>
                 
-                    { fetchedPoll.length === 0 ? null :  fetchedPoll.questions.map((i, index)=> {
+                    { questions.length === 0 ? null :  questions.map((i, index)=> {
                         return(
                             <label className='question-container'>
                                 <input id={index} className='questions-check' type={'checkbox'} name='questions-check' onClick={handleCheck}/> 

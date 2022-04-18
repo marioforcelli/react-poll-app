@@ -4,23 +4,20 @@ import { Context } from "./Context";
 import {v4 as uuidv4} from 'uuid'
 
 export default function ContextProvider({children}){
-    const [newPoll, setNewPoll] = useState({
-        'id': uuidv4(),
-        'title': '',
-        'questions': []
-    },
-)
-   const [fetchedPoll, setFetchedPoll] = useState([])
+    const [pollId, setPollId] = useState();
+    const [pollTitle, setPollTitle] = useState('')
+    const [questions, setQustions] = useState([])
 
 
     const createPoll = () => {
-
-        if(newPoll){
+     
+        
+        if(pollTitle && questions.length){
             Api.addPoll(
                 {
-                    'id': newPoll.id,
-                    'title': newPoll.title,
-                    'questions':  newPoll.questions.filter(i => i.question)
+                    'id': uuidv4(),
+                    'title': pollTitle,
+                    'questions':  questions.filter(i => i.question)
                 }
             )
         }
@@ -28,24 +25,28 @@ export default function ContextProvider({children}){
 
     const getPoll = (id) =>{
         if(id){
-            let res = {}
             Api.fetchPoll(id).then(data =>{
-                data.docs.map(docs => setFetchedPoll(docs.data()))
+                data.docs.map(docs =>{
+                    console.log(docs.data())
+                    setPollId(docs.data().id)
+                    setQustions(docs.data().questions)
+                    setPollTitle(docs.data().title)
+                })
                 
             })
-            console.log(fetchedPoll)
+            
         }
         
 
     }
 
-    const addVote = (index) =>{
-        setFetchedPoll(prev => prev.questions[index].votes++)
-        console.log(fetchedPoll)
+    const addVote = (voteInput) =>{
+        setQustions(voteInput)
+        Api.updatePoll(pollId, questions)
     }
 
     return(
-        <Context.Provider value={{createPoll, newPoll, setNewPoll, getPoll, fetchedPoll, addVote, setFetchedPoll}}>
+        <Context.Provider value={{questions, setQustions, setPollTitle, pollTitle, createPoll, getPoll, addVote}}>
             {children}
         </Context.Provider>
 

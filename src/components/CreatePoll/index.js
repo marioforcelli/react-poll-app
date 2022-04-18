@@ -3,8 +3,6 @@ import { Container } from './styles'
 import { useContext } from 'react'
 import { Context } from '../../context/Context'
 import { Link } from 'react-router-dom'
-import Api from '../../services/Api'
-
 
 
 
@@ -17,30 +15,20 @@ export default function CreatePoll(){
         {'question' : '', 'votes': 0}
         
     ]);
-    const {setNewPoll, newPoll, createPoll, getPoll} = useContext(Context)
-    const [title, setTitle] = useState('')
+    const {questions, setQustions, setPollTitle, pollTitle, createPoll} = useContext(Context)
     const handleSubmit = () =>{
-        createPoll()
+        createPoll();
+        
     }
     const formChange = (e) =>{
        const {name, value, id} = e.target
        if(name === 'title'){
-           setNewPoll(prev =>{
-               return{
-                   ...prev, 'title': value
-               }
-           })
+           setPollTitle(value)
        }else{
-        console.log()
-        let auxFormInput = [...formData]
-        auxFormInput[id].question = value
-        setFormData(auxFormInput)
-        setNewPoll(prev => {
-            return { 
-                ...prev,
-                'questions': formData
-            }
-        })
+        let formInput = [...formData]
+        formInput[id].question = value
+        setQustions(formInput)
+        
        }
 
     }
@@ -60,11 +48,10 @@ export default function CreatePoll(){
 
     return(
         <Container>
-            {console.log(formData, newPoll)}
             <h1>Criação da Enquete</h1>
             <div className='title'>
                 <a className='poll-title-text'>Título da enquete:</a>
-                <input name='title' value={newPoll.title} onChange={formChange} className='poll-title-input'></input>
+                <input name='title' value={pollTitle} onChange={formChange} className='poll-title-input'></input>
             </div>
                 <a>Questões:</a>
                 <form className='form-questions'>   
@@ -75,7 +62,6 @@ export default function CreatePoll(){
                     })}
                 </form>
             <button onClick={handleSubmit} className='save-btn'>Criar Enquete</button>
-            {}
         </Container>
     )
 
