@@ -1,4 +1,4 @@
 import { createContext } from 'react';
 
-export const Context = createContext(0)
+export const Context = createContext([])
 

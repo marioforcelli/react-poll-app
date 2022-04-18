@@ -10,35 +10,49 @@ import Api from '../../services/Api'
 
 
 export default function CreatePoll(){
-    const [polls, setPolls] = useContext(Context)
-    const [title, setTitle] = useState('')
-    const handleSubmit = (e) =>{
+    const [formData, setFormData] = useState([
+        {'question' : '', 'votes': 0},
+        {'question' : '', 'votes': 0},
+        {'question' : '', 'votes': 0},
+        {'question' : '', 'votes': 0}
         
-        Api.addPoll(polls)
-        console.log(polls)
+    ]);
+    const {setNewPoll, newPoll, createPoll, getPoll} = useContext(Context)
+    const [title, setTitle] = useState('')
+    const handleSubmit = () =>{
+        createPoll()
     }
     const formChange = (e) =>{
        const {name, value, id} = e.target
        if(name === 'title'){
-           setTitle(value)
+           setNewPoll(prev =>{
+               return{
+                   ...prev, 'title': value
+               }
+           })
        }else{
-        let formInput = [...polls.questions]
-        formInput[id].question = value
-        setPolls({...polls, 'questions': formInput})
+        console.log()
+        let auxFormInput = [...formData]
+        auxFormInput[id].question = value
+        setFormData(auxFormInput)
+        setNewPoll(prev => {
+            return { 
+                ...prev,
+                'questions': formData
+            }
+        })
        }
 
     }
 
     const handleKeyDown = (e) =>{
             if (!e.target.nextSibling){
-
-                setPolls(prev => {
-                    return {
+                setFormData(prev =>{
+                    return [
                         ...prev,
-                        'questions' : [...prev.questions, {'question': '', 'votes': 0}]
-                    }
+                        {'question': '', 'votes': 0}
+                    ]
                 })
-                console.log(polls)
 
 
             }
@@ -46,14 +60,15 @@ export default function CreatePoll(){
 
     return(
         <Container>
+            {console.log(formData, newPoll)}
             <h1>Criação da Enquete</h1>
             <div className='title'>
                 <a className='poll-title-text'>Título da enquete:</a>
-                <input name='title' value={title} onChange={formChange} className='poll-title-input'></input>
+                <input name='title' value={newPoll.title} onChange={formChange} className='poll-title-input'></input>
             </div>
                 <a>Questões:</a>
                 <form className='form-questions'>   
-                    {polls.questions.length && polls.questions.map((i, index) =>{
+                    {formData.map((i, index) =>{
                         return(
                             <input name='question'  onChange={formChange} onKeyDown={handleKeyDown} id={index} ></input>
                         )
