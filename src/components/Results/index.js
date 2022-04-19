@@ -1,27 +1,46 @@
 import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { Context } from "../../context/Context"
-import { Container, Title, VoteItem } from "./styles";
+import { Container, FillProgress, ProgressBar, Title, VoteItem } from "./styles";
 
 export default function Results() {
     const {getPoll, pollTitle, questions} = useContext(Context)
     const { id } = useParams();
+    const totalVotes = questions.map(i=> i.votes).reduce((acc, el) => el += acc, 0)
+
 
 useEffect(()=>{
     getPoll(id)
+    
 
 }, [])
 
-    console.log(pollTitle, questions)
     return(
+        
 
         <Container>
+           
             <Title>{pollTitle}</Title>
-            {questions.length === 0 ? null : questions.map(i => {
+            {questions.length === 0 ? null : questions.map((i, index) => {
                 return(
                     <div>
-                        <VoteItem>{i.question}</VoteItem>
-
+                        
+                        <VoteItem>
+                            <span>
+                                {i.question}
+                            </span>
+                            <ProgressBar>
+                                <FillProgress width={
+                                    ()=>{
+                                        if (totalVotes === 0){
+                                            return 0;
+                                        }
+                                        return questions[index].votes / totalVotes * 100
+                                    }
+                                }/>
+                            </ProgressBar>
+                        </VoteItem>
+                        
                     </div>
 
                 )

@@ -15,7 +15,7 @@ export default function CreatePoll(){
         {'question' : '', 'votes': 0}
         
     ]);
-    const {questions, setQustions, setPollTitle, pollTitle, createPoll} = useContext(Context)
+    const {questions, setQustions, setPollTitle, pollTitle, createPoll, pollId} = useContext(Context)
     const handleSubmit = () =>{
         createPoll();
         
@@ -61,7 +61,7 @@ export default function CreatePoll(){
                         )
                     })}
                 </form>
-            <button onClick={handleSubmit} className='save-btn'>Criar Enquete</button>
+            <Link to={`/${pollId}`}><button onClick={handleSubmit} className='save-btn'>Criar Enquete</button></Link>
         </Container>
     )
 

@@ -56,7 +56,7 @@ export default function PollVote(index){
                 </div>
                 <div className='bottom-poll' >
                     <button className='send-btn' onClick={handleClick}>Enviar voto</button>
-                    <span>Ver resultados</span>
+                    <Link to={`/results/${id}`} ><a>Ver resultados</a></Link>
                 </div>
 
             </div>

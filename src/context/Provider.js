@@ -4,9 +4,10 @@ import { Context } from "./Context";
 import {v4 as uuidv4} from 'uuid'
 
 export default function ContextProvider({children}){
-    const [pollId, setPollId] = useState();
+    const [pollId, setPollId] = useState(uuidv4());
     const [pollTitle, setPollTitle] = useState('')
     const [questions, setQustions] = useState([])
+
 
 
     const createPoll = () => {
@@ -15,7 +16,7 @@ export default function ContextProvider({children}){
         if(pollTitle && questions.length){
             Api.addPoll(
                 {
-                    'id': uuidv4(),
+                    'id': pollId,
                     'title': pollTitle,
                     'questions':  questions.filter(i => i.question)
                 }
@@ -46,7 +47,7 @@ export default function ContextProvider({children}){
     }
 
     return(
-        <Context.Provider value={{questions, setQustions, setPollTitle, pollTitle, createPoll, getPoll, addVote}}>
+        <Context.Provider value={{questions, setQustions, setPollTitle, pollTitle, createPoll, getPoll, addVote, pollId}}>
             {children}
         </Context.Provider>
 

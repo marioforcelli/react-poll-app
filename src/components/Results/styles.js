@@ -8,18 +8,43 @@ export const Container = styled.div`
 
 `
 export const Title = styled.h1`
-    font-size: 33px;
-    font-weight: 500;
+    font-size: 50px;
+    font-weight: 700;
     margin-bottom: 20px;
 `
 
 export const VoteItem = styled.div`
     height: 120px;
-    width: min(80vw, 870px);
+    width: min(80vw, 1000px);
     display: flex;
-    align-items: center;
+    justify-content: space-between;
     box-shadow: 0px 0px 6px 1px rgba(198,198,198,0.9);
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
+    flex-direction: column;
+
+    & span{
+        font-size: 24px;
+        font-weight: 500
+    }
+`
+
+export const ProgressBar = styled.div`
+    width: 100%
+    min-height: 2px;
+    height: 12px;
+    background-color: rgba(198,198,198,0.5);
+    border-radius: 10px;
+`
+
+export const FillProgress = styled.div`
+    
+    width: ${props => props.width}%;
+    background-color: #5ec96e;
+    min-height: 2px;
+    height: 12px;
+    z-index: 2;
+    border-radius: 10px;
+
 `
