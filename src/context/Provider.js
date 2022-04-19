@@ -11,7 +11,8 @@ export default function ContextProvider({children}){
 
 
     const createPoll = () => {
-     
+        setPollTitle('')
+        setQustions([])
         
         if(pollTitle && questions.length){
             Api.addPoll(
