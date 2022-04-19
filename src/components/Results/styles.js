@@ -28,6 +28,11 @@ export const VoteItem = styled.div`
         font-size: 24px;
         font-weight: 500
     }
+
+    & div {
+        display: flex;
+        justify-content: space-between;
+    }
 `
 
 export const ProgressBar = styled.div`

@@ -26,9 +26,15 @@ useEffect(()=>{
                     <div>
                         
                         <VoteItem>
+                            <div>
                             <span>
                                 {i.question}
                             </span>
+                            <span>
+                                {(questions[index].votes / totalVotes * 100).toFixed(2)}%
+                            </span>
+                            </div>
+
                             <ProgressBar>
                                 <FillProgress width={
                                     ()=>{
@@ -40,7 +46,6 @@ useEffect(()=>{
                                 }/>
                             </ProgressBar>
                         </VoteItem>
-                        
                     </div>
 
                 )
