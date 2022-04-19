@@ -31,7 +31,7 @@ useEffect(()=>{
                                 {i.question}
                             </span>
                             <span>
-                                {(questions[index].votes / totalVotes * 100).toFixed(2)}%
+                                {totalVotes? `${(questions[index].votes / totalVotes * 100).toFixed(2)}%`: null}
                             </span>
                             </div>
 
