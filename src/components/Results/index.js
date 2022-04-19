@@ -1,15 +1,33 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { Context } from "../../context/Context"
+import { Container, Title, VoteItem } from "./styles";
 
 export default function Results() {
-    const {id} = useParams()
-    const [polls, setPolls] = useContext(Context)
+    const {getPoll, pollTitle, questions} = useContext(Context)
+    const { id } = useParams();
 
-    console.log(polls)
+useEffect(()=>{
+    getPoll(id)
+
+}, [])
+
+    console.log(pollTitle, questions)
     return(
 
-        <div></div>
+        <Container>
+            <Title>{pollTitle}</Title>
+            {questions.length === 0 ? null : questions.map(i => {
+                return(
+                    <div>
+                        <VoteItem>{i.question}</VoteItem>
+
+                    </div>
+
+                )
+
+            })}
+        </Container>
     )
     
 }
