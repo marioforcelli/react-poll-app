@@ -17,7 +17,7 @@ export const Container = styled.div`
 
     & input{
         height: 40px;
-        width: min(70vw, 400px);
+        width: min(70vw, 600px);
         margin: 0px 0px 20px 0px;
         padding-left: 20px;
         font-size: 25px;
@@ -42,14 +42,14 @@ export const Container = styled.div`
         margin-top: 0;
         margin-bottom: 30px;
         height: 55px;
-        width: min(600px, 85vw);
+        width: min(800px, 85vw);
         font-size: 40px;
     }
 
     & .save-btn{
         margin-top: 10px;
         justify-content: start;
-        width: min(70vw, 400px);
+        width: min(70vw, 600px);
         height: 50px;
         background-color: #5ec96e;
         border: none;
