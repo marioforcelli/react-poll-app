@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
+import Loading from "../../components/Loading";
 import { Context } from "../../context/Context"
 import { Container, FillProgress, ProgressBar, Title, VoteItem } from "./styles";
 
@@ -21,7 +22,7 @@ useEffect(()=>{
         <Container>
            
             <Title>{pollTitle}</Title>
-            {questions.length === 0 ? null : questions.map((i, index) => {
+            {questions.length === 0 ? <Loading/> : questions.map((i, index) => {
                 return(
                     <div>
                         

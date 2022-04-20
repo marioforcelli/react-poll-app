@@ -3,7 +3,7 @@ import { Context } from '../../context/Context';
 import { useContext, useEffect, useState } from 'react';
 import { Container } from './styles';
 import {Navigate } from 'react-router-dom'
-import Api from '../../services/Api';
+import Loading from '../../components/Loading'
 
 
 export default function PollVote(index){
@@ -31,7 +31,6 @@ export default function PollVote(index){
     const handleClick = (e) =>{
         let voteInput = [...questions]
         voteInput[index].votes = voteInput[index].votes + 1
-
         addVote(voteInput)
     }
 
@@ -43,7 +42,7 @@ export default function PollVote(index){
                 <h1 className='question-title'>{pollTitle}</h1>
                 <div className='wrap-questions'>
                 
-                    { questions.length === 0 ? null :  questions.map((i, index)=> {
+                    { questions.length === 0 ? <Loading list={4} /> :  questions.map((i, index)=> {
                         return(
                             <label className='question-container'>
                                 <input id={index} className='questions-check' type={'checkbox'} name='questions-check' onClick={handleCheck}/> 
@@ -51,11 +50,13 @@ export default function PollVote(index){
                             </label>  
                             
                         )
-                    })}
+                    })
+                    
+                    }
 
                 </div>
                 <div className='bottom-poll' >
-                    <button className='send-btn' onClick={handleClick}>Enviar voto</button>
+                    <Link to='/voted'><button className='send-btn' onClick={handleClick}>Enviar voto</button></Link>
                     <Link to={`/results/${id}`} ><a>Ver resultados</a></Link>
                 </div>
 
